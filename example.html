@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hamburgers by Jonathan Suh</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    code {
+      display: inline-block;
+    }
+
+    code,
+    .hamburger {
+      vertical-align: middle;
+    }
+  </style>
+  <script
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+      crossorigin="anonymous"></script>
+  <script>
+
+      // A $( document ).ready() block.
+    $( document ).ready(function() {
+
+        var $hamburger = $(".hamburger");
+        $hamburger.on("click", function(e) {
+          $hamburger.toggleClass("is-active");
+          // Do something else, like open/close menu
+        });
+
+    });
+
+</script>
+</head>
+<body>
+
+
+  <button class="hamburger hamburger--spin" type="button"
+          aria-label="Menu" aria-controls="navigation">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+      <span class="label">MENU</span>
+  </button>
+  <nav id="navigation">
+    <!--navigation goes here-->
+  </nav>
+
+
+  <script>
+  /**
+   * forEach implementation for Objects/NodeLists/Arrays, automatic type loops and context options
+   *
+   * @private
+   * @author Todd Motto
+   * @link https://github.com/toddmotto/foreach
+   * @param {Array|Object|NodeList} collection - Collection of items to iterate, could be an Array, Object or NodeList
+   * @callback requestCallback      callback   - Callback function for each iteration.
+   * @param {Array|Object|NodeList} scope=null - Object/NodeList/Array that forEach is iterating over, to use as the this value when executing callback.
+   * @returns {}
+   */
+    /*
+
+    var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
+
+    var hamburgers = document.querySelectorAll(".hamburger");
+    if (hamburgers.length > 0) {
+      forEach(hamburgers, function(hamburger) {
+        hamburger.addEventListener("click", function() {
+          this.classList.toggle("is-active");
+        }, false);
+      });
+    }
+    */
+  </script>
+</body>
+</html>
