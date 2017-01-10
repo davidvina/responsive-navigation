@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+// display headings
+
+.display-1{
+
+}
+
+.display-2{
+
+}
+
+.display-3{
+
+}
+
+.display-4{
+
+}
+
+
+
+
+// responsives helpers
+
+.img-resp{
+	width: 100%;
+	height: auto;
+}
+
+
+// text helpers
+
+.small{
+	@extend small;
+}
+
+.mark{
+	@extend mark;
+}
+
+//
+
+.small{
+	font-size: 80% !important;
+}
+
+.big{
+	font-size: 130% !important;
+}
+
+.block{
+	display: block !important;
+	width: 100%;
+}
+
+//
+
+.warning{}
+
+.success{}
+
+.danger{}
+
+
+////////////////////////
+// Banner
+////////////////////////
+.banner{
+	text-align: center;
+	background-color: $primary;
+	padding: 50px 0px;
+}
+
+///////////////////////
+// buttons
+///////////////////////
+
+.button{
+	@include button();
+}
+
+
+button.big,
+input[type="button"].big,
+input[type="submit"].big,
+input[type="reset"].big,
+.button.big{
+	padding: $button-padding-big;
+}
+
+button.small,
+input[type="button"].small,
+input[type="submit"].small,
+input[type="reset"].small,
+.button.small{
+	padding: $button-padding-small;
+}

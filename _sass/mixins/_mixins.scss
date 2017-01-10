@@ -1,0 +1,147 @@
+@charset "UTF-8";
+
+// calculate rem
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+
+// transitions
+@mixin transition($args: $transition) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+// images
+
+@mixin img-responsive(){
+  width: 100%;
+  height: auto;
+}
+
+// bordes redondeados
+
+@mixin border-radius($radius: 6px){
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+
+// mixin sombras
+@mixin box-shadow($value) {
+    -webkit-box-shadow:$value;
+    -moz-box-shadow:$value;
+    box-shadow:$value;
+}
+
+// sombras de texto
+
+@mixin text-shadow ($shadow: $text-shadow-default) {
+	text-shadow: $shadow;
+}
+
+
+// box-sizing
+
+@mixin box-sizing($value: border-box){
+-webkit-box-sizing: $value;
+-moz-box-sizing: $value;
+box-sizing: $value;
+}
+
+
+// placeholder
+
+@mixin placeholder {
+  .placeholder {
+      @content;
+  }
+  :-moz-placeholder {
+    @content;
+  }
+  ::-moz-placeholder {
+    @content;
+  }
+  ::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+// navigation menus
+
+// menu de navegacion horizontal
+@mixin nav-hor ($align: left){
+
+  text-align: $align;
+
+  .list-heading, ul, li{
+    display: inline-block;
+  }
+
+  li{
+    list-style: none;
+  }
+
+  a {
+    display: inline-block;
+  }
+}
+
+
+// menu de navegacion horizontal
+@mixin nav-ver ($align: left){
+
+  text-align: $align;
+
+  .list-heading{
+    display: block;
+  }
+
+  ul{
+    a, li{
+      display: block;
+    }
+
+    li{
+      list-style: none;
+    }
+
+  }
+
+
+
+}
+
+
+// nav-bar
+@import 'nav-bar';
+
+
+// buttons
+@mixin button(){
+  //font-size: $font-size;
+  text-align: center;
+  display: inline-block;
+  padding: $button-padding;
+  color: $button-color;
+  background-color: $button-bg;
+  border: 2px solid $button-border-color;
+  @include border-radius($border-radius);
+  @include transition();
+  @include box-sizing();
+  cursor: pointer;
+  &:hover{
+    color: $button-color-hover;
+    background-color: $button-bg-hover;
+    border: 2px solid $button-border-color-hover;
+  }
+}

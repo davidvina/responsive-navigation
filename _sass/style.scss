@@ -1,1 +1,98 @@
-@import "hamburgers/hamburgers"
+@charset "UTF-8"; //necessario para poder utilitzar acentos
+
+/****************************************************************
+
+ INDEX
+* 0. Tipografia externa
+* 1. Base
+* 2. Layout
+    2.1 Contenedores genéricos
+    2.2 Cabecera - #main-header
+    2.3 Navegación principal - #main-navigation
+    2.4 Contenido principal - #main-content
+    2.5 Pie - #main-footer
+* 3. Estilos de terceros
+* 4. Estilos elementos comunes web
+    4.1 Generales
+    4.1 Cabecera
+    4.2 Menu navegación principal
+    4.4 Contenido
+    4.4 Pie
+* 5. Estilos por pagina
+    5.1. Pagina inicio - index.html
+    5.2. Com comprar - comcomprar.html
+    5.3. Llista de productes o página categoria - categoria.html
+    5.4. Pagina producte - producte.html
+
+
+*****************************************************************/
+
+
+
+@import 'variables';  // importar siempre variables primero
+
+@import 'grid/grid';       // regilla
+@import 'mixins/mixins';     // patrones reutilizables por las reglas
+
+
+
+/****************************************************************
+*
+* 1. Base
+*     estilo etiquetas generales por defecto
+*
+*****************************************************************/
+
+@import 'base/base'; // estilos básicos
+
+/****************************************************************
+*
+* 2. Layout
+*    Maquetación bloques
+*    sólo se definen posicionamiento, espaciado y color de fondo
+*
+*****************************************************************/
+
+//@import 'layout';  // estructura
+
+
+/****************************************************************
+*
+* 3. Estilos de terceros
+*
+*    estilos externos importados
+*
+*****************************************************************/
+
+/*
+Iconos Fontello
+http://fontello.com/
+*/
+//@import 'vendor/fontello';
+
+
+
+/****************************************************************
+*
+* 4. Classes
+*
+*
+*****************************************************************/
+
+@import 'classes/classes';
+
+
+@import 'vendor/hamburgers/hamburgers';
+
+
+button.hamburger{
+
+  &:hover{
+    background-color: transparent;
+    border: none;
+  }
+}
+
+#navigation{
+  @include nav-bar('right');
+}
