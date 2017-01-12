@@ -89,7 +89,6 @@
 
 
 $navbar-breackpoint: 768px;
-
 $navbar-bg: #FF6B5A;
 $navbar-link-color: #fff;
 $navbar-link-color-bg: #FF6B5A;
@@ -97,7 +96,6 @@ $navbar-link-color-hover: $navbar-link-color;
 $navbar-link-color-bg-hover: #68AFC1;
 $navbar-link-active-color: red;
 $navbar-link-active-color-bg: green;
-
 $navbar-link-border-color: lighten($navbar-link-color-bg, 30%);
 // based on
 // https://webdesign.tutsplus.com/tutorials/big-menus-small-screens-responsive-multi-level-navigation--webdesign-8452
@@ -131,24 +129,38 @@ $navbar-link-border-color: lighten($navbar-link-color-bg, 30%);
   .menu {
       display: none;
 
-      &:before,
-      &:after{
-        content: " ";
-        display: table;
-        clear: both;
-      }
+      @include clearfix();
 
       a {
           padding: 10px 15px;
           color: $navbar-link-color;
-          border-top: 1px solid $navbar-link-border-color;
           display: block;
           box-sizing: border-box;
-          *zoom: 1;
+          border-bottom: 1px solid $navbar-link-border-color;
+          @include transition(all 500ms ease);
+      }
+
+      > li:last-child > a {
+        border-bottom: none;
       }
 
       a:hover{
         color: $navbar-link-color-hover;
+        background-color: $navbar-link-color-bg-hover;
+      }
+
+      // caret for expand menus
+      a.has-submenu:after{
+        content: " +";
+        width: 20px;
+        text-align: right;
+        display: inline-block;
+        position: absolute;
+        right: 10px;
+      }
+
+      li.expanded > a.has-submenu:after{
+        content: " -" !important;
       }
 
       > li {
@@ -157,24 +169,23 @@ $navbar-link-border-color: lighten($navbar-link-color-bg, 30%);
           z-index: 200;
       }
 
-      // show content when hover
-      li.hover > ul {
-        display: block;
-      }
-
       // submenus 1rst level
       li{
         position: relative;
 
-        ul {
-            display: none;
+        > ul {
+            //display: none;
+            max-height: 0px;
+            opacity: 0;
+            overflow: hidden;
             position: static;
             z-index: 100;
+            @include transition();
+
         }
 
         li a {
             background-color: lighten($navbar-bg, 5%);
-            border-bottom: 1px solid $navbar-link-border-color;
         }
 
         // submenus 2n level
@@ -187,12 +198,30 @@ $navbar-link-border-color: lighten($navbar-link-color-bg, 30%);
             background-color: lighten($navbar-bg, 5%);
         }
       }
+
+      // show content when hover
+      li.expanded > ul {
+        //display: block;
+        height: auto;
+        overflow: visible;
+        max-height: inherit !important;
+        opacity: 1;
+      }
   }
 
 
   @media screen and (min-width: $navbar-breackpoint) {
     .menu{
       display: block !important;
+
+      a.has-submenu:after{
+        position: static;
+      }
+
+      // elimina borde del primer menu expandido
+      > li > a {
+        border-bottom: none;
+      }
 
       > li {
         display: inline-block;

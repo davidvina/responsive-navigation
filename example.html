@@ -47,42 +47,50 @@
         			if (ww < options.toggleWidth) {
 
         				if (!$(".toggleMenu").hasClass("is-active")) {
-        					$(".nav-bar .menu").hide();
+        					//$(".nav-bar .menu").hide();
+                  //$(".nav-bar .menu").slideUp("slow");
         				} else {
-        					$(".nav-bar .menu").show();
+        					//$(".nav-bar .menu").show();
+                  //$(".nav-bar .menu").slideDown("slow");
         				}
         				$(".nav-bar .menu li").unbind('mouseenter mouseleave');
         				$(".nav-bar .menu li a.parent").unbind('click').bind('click', function(e) {
         					// must be attached to anchor element to prevent bubbling
         					e.preventDefault();
-        					$(this).parent("li").toggleClass("hover");
+        					$(this).parent("li").toggleClass("expanded");
         				});
         			}
         			else if (ww >= options.toggleWidth) {
 
-        				$(".nav-bar .menu").show();
-        				$(".nav-bar .menu li").removeClass("hover");
+          			//	$(".nav-bar .menu").show();
+                //  $(".nav-bar .menu").slideDown("slow");
+
+        				$(".nav-bar .menu li").removeClass("expanded");
         				$(".nav-bar .menu li a").unbind('click');
         				$(".nav-bar .menu li").unbind('mouseenter mouseleave').bind('mouseenter mouseleave', function() {
         					// must be attached to li so that mouseleave is not triggered when hover over submenu
-        					$(this).toggleClass('hover');
+        					$(this).toggleClass('expanded');
         				});
         			}
-        		}
+        		} // adjustMenu
 
         		return this.each(function() {
+
         			$(".toggleMenu").click(function(e) {
         				e.preventDefault();
         				$(this).toggleClass("is-active");
         				$(this).next(".menu").toggle();
         				adjustMenu();
         			});
+
         			adjustMenu();
         			addParents();
+
         			$(window).bind('resize orientationchange', function() {
         				ww = document.body.clientWidth;
         				adjustMenu();
         			});
+
         		});
 
         }
@@ -108,17 +116,17 @@
 
     <ul class="menu">
         <li>
-            <a href="#">Shoes</a>
+            <a href="#" class="has-submenu">Shoes</a>
             <ul>
                 <li>
-                    <a href="#">Womens</a>
+                    <a href="#" class="has-submenu">Womens</a>
                     <ul>
                         <li><a href="#">Sandals</a></li>
                         <li><a href="#">Sneakers</a></li>
                         <li><a href="#">Wedges</a></li>
                         <li><a href="#">Heels</a></li>
                         <li><a href="#">Loafers</a></li>
-                        <li><a href="#">Flats</a>
+                        <li><a href="#" class="has-submenu">Flats</a>
                           <ul>
                               <li><a href="#">Sandals</a></li>
                               <li><a href="#">Sneakers</a></li>
@@ -131,7 +139,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Mens</a>
+                    <a href="#" class="has-submenu">Mens </a>
                     <ul>
                         <li><a href="#">Loafers</a></li>
                         <li><a href="#">Sneakers</a></li>

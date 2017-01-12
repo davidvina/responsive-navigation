@@ -45,6 +45,7 @@
     box-shadow:$value;
 }
 
+
 // sombras de texto
 
 @mixin text-shadow ($shadow: $text-shadow-default) {
@@ -58,6 +59,25 @@
 -webkit-box-sizing: $value;
 -moz-box-sizing: $value;
 box-sizing: $value;
+}
+
+// clear fix
+// based http://nicolasgallagher.com/micro-clearfix-hack/
+@mixin clearfix(){
+  & {
+    *zoom: 1;
+  }
+
+  &:before,
+  &:after{
+    content: " ";
+    display: table;
+    clear: both;
+  }
+
+  &:after{
+    clear: both;
+  }
 }
 
 

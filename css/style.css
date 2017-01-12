@@ -56,41 +56,74 @@
     list-style: none; }
   .nav-bar .menu {
     display: none; }
+    .nav-bar .menu {
+      *zoom: 1; }
     .nav-bar .menu:before, .nav-bar .menu:after {
       content: " ";
       display: table;
       clear: both; }
+    .nav-bar .menu:after {
+      clear: both; }
     .nav-bar .menu a {
       padding: 10px 15px;
       color: #fff;
-      border-top: 1px solid #fff4f3;
       display: block;
       box-sizing: border-box;
-      *zoom: 1; }
+      border-bottom: 1px solid #fff4f3;
+      -webkit-transition: all 500ms ease;
+      -moz-transition: all 500ms ease;
+      -ms-transition: all 500ms ease;
+      -o-transition: all 500ms ease;
+      transition: all 500ms ease; }
+    .nav-bar .menu > li:last-child > a {
+      border-bottom: none; }
     .nav-bar .menu a:hover {
-      color: #fff; }
+      color: #fff;
+      background-color: #68AFC1; }
+    .nav-bar .menu a.has-submenu:after {
+      content: " +";
+      width: 20px;
+      text-align: right;
+      display: inline-block;
+      position: absolute;
+      right: 10px; }
+    .nav-bar .menu li.expanded > a.has-submenu:after {
+      content: " -" !important; }
     .nav-bar .menu > li {
       display: block;
       position: relative;
       z-index: 200; }
-    .nav-bar .menu li.hover > ul {
-      display: block; }
     .nav-bar .menu li {
       position: relative; }
-      .nav-bar .menu li ul {
-        display: none;
+      .nav-bar .menu li > ul {
+        max-height: 0px;
+        opacity: 0;
+        overflow: hidden;
         position: static;
-        z-index: 100; }
+        z-index: 100;
+        -webkit-transition: all 0.3s ease 0s;
+        -moz-transition: all 0.3s ease 0s;
+        -ms-transition: all 0.3s ease 0s;
+        -o-transition: all 0.3s ease 0s;
+        transition: all 0.3s ease 0s; }
       .nav-bar .menu li li a {
-        background-color: #ff8274;
-        border-bottom: 1px solid #fff4f3; }
+        background-color: #ff8274; }
       .nav-bar .menu li li li a {
         background-color: #ff998d; }
       .nav-bar .menu li li li li a {
         background-color: #ff8274; }
+    .nav-bar .menu li.expanded > ul {
+      height: auto;
+      overflow: visible;
+      max-height: inherit !important;
+      opacity: 1; }
   @media screen and (min-width: 768px) {
     .nav-bar .menu {
       display: block !important; }
+      .nav-bar .menu a.has-submenu:after {
+        position: static; }
+      .nav-bar .menu > li > a {
+        border-bottom: none; }
       .nav-bar .menu > li {
         display: inline-block; }
       .nav-bar .menu li ul {
