@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Hamburgers by Jonathan Suh</title>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
   <link rel="stylesheet" href="css/style.css">
   <style>
     code {
@@ -23,11 +24,70 @@
       // A $( document ).ready() block.
     $( document ).ready(function() {
 
-        var $hamburger = $(".hamburger");
-        $hamburger.on("click", function(e) {
-          $hamburger.toggleClass("is-active");
-          // Do something else, like open/close menu
-        });
+        // menu
+        $.fn.dropdowns = function (options) {
+
+        		var defaults = {
+        			toggleWidth: 768
+        		}
+
+        		var options = $.extend(defaults, options);
+
+        		var ww = document.body.clientWidth;
+
+        		var addParents = function() {
+        			$(".nav-bar li a").each(function() {
+        				if ($(this).next().length > 0) {
+        					$(this).addClass("parent");
+        				}
+        			});
+        		}
+
+        		var adjustMenu = function() {
+        			if (ww < options.toggleWidth) {
+
+        				if (!$(".toggleMenu").hasClass("is-active")) {
+        					$(".nav-bar .menu").hide();
+        				} else {
+        					$(".nav-bar .menu").show();
+        				}
+        				$(".nav-bar .menu li").unbind('mouseenter mouseleave');
+        				$(".nav-bar .menu li a.parent").unbind('click').bind('click', function(e) {
+        					// must be attached to anchor element to prevent bubbling
+        					e.preventDefault();
+        					$(this).parent("li").toggleClass("hover");
+        				});
+        			}
+        			else if (ww >= options.toggleWidth) {
+
+        				$(".nav-bar .menu").show();
+        				$(".nav-bar .menu li").removeClass("hover");
+        				$(".nav-bar .menu li a").unbind('click');
+        				$(".nav-bar .menu li").unbind('mouseenter mouseleave').bind('mouseenter mouseleave', function() {
+        					// must be attached to li so that mouseleave is not triggered when hover over submenu
+        					$(this).toggleClass('hover');
+        				});
+        			}
+        		}
+
+        		return this.each(function() {
+        			$(".toggleMenu").click(function(e) {
+        				e.preventDefault();
+        				$(this).toggleClass("is-active");
+        				$(this).next(".menu").toggle();
+        				adjustMenu();
+        			});
+        			adjustMenu();
+        			addParents();
+        			$(window).bind('resize orientationchange', function() {
+        				ww = document.body.clientWidth;
+        				adjustMenu();
+        			});
+        		});
+
+        }
+
+        $(".nav-bar").dropdowns();
 
     });
 
@@ -36,62 +96,60 @@
 <body>
 
 
-
-  <nav class="navbar" id="navigation">
-
-    <button class="hamburger hamburger--spin" type="button"
+  <nav class="nav-bar">
+  <div class="container">
+    <button class="hamburger hamburger--spin toggleMenu" type="button"
             aria-label="Menu" aria-controls="navigation" data-target="#navigation">
-      <span class="hamburger-box">
-        <span class="hamburger-inner"></span>
-      </span>
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
         <span class="label">MENU</span>
     </button>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="navigation">
-      <ul class="nav navbar-nav">
-        <li><a href="#">Link </a></li>
-        <li><a href="#">Link 2</a></li>
-        <li><a href="#">Link 3</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
+    <ul class="menu">
+        <li>
+            <a href="#">Shoes</a>
+            <ul>
+                <li>
+                    <a href="#">Womens</a>
+                    <ul>
+                        <li><a href="#">Sandals</a></li>
+                        <li><a href="#">Sneakers</a></li>
+                        <li><a href="#">Wedges</a></li>
+                        <li><a href="#">Heels</a></li>
+                        <li><a href="#">Loafers</a></li>
+                        <li><a href="#">Flats</a>
+                          <ul>
+                              <li><a href="#">Sandals</a></li>
+                              <li><a href="#">Sneakers</a></li>
+                              <li><a href="#">Wedges</a></li>
+                              <li><a href="#">Heels</a></li>
+                              <li><a href="#">Loafers</a></li>
+                              <li><a href="#">Flats</a></li>
+                          </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Mens</a>
+                    <ul>
+                        <li><a href="#">Loafers</a></li>
+                        <li><a href="#">Sneakers</a></li>
+                        <li><a href="#">Formal</a></li>
+                    </ul>
+                </li>
+            </ul>
         </li>
+        <li><a href="#">Shirts</a></li>
+        <li><a href="#">Pants</a></li>
+        <li><a href="#">Skirts</a></li>
+
       </ul>
-    </div><!-- /.navbar-collapse -->
-</nav>
 
-  <script>
-  /**
-   * forEach implementation for Objects/NodeLists/Arrays, automatic type loops and context options
-   *
-   * @private
-   * @author Todd Motto
-   * @link https://github.com/toddmotto/foreach
-   * @param {Array|Object|NodeList} collection - Collection of items to iterate, could be an Array, Object or NodeList
-   * @callback requestCallback      callback   - Callback function for each iteration.
-   * @param {Array|Object|NodeList} scope=null - Object/NodeList/Array that forEach is iterating over, to use as the this value when executing callback.
-   * @returns {}
-   */
-    /*
+  </div>
+  </nav>
 
-    var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
 
-    var hamburgers = document.querySelectorAll(".hamburger");
-    if (hamburgers.length > 0) {
-      forEach(hamburgers, function(hamburger) {
-        hamburger.addEventListener("click", function() {
-          this.classList.toggle("is-active");
-        }, false);
-      });
-    }
-    */
-  </script>
+
 </body>
 </html>

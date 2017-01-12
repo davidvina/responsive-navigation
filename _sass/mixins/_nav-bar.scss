@@ -77,3 +77,143 @@
   }
 
 } // @mixin nav-bar
+
+
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 0px auto;
+}
+
+
+
+$navbar-breackpoint: 768px;
+
+$navbar-bg: #FF6B5A;
+$navbar-link-color: #fff;
+$navbar-link-color-bg: #FF6B5A;
+$navbar-link-color-hover: $navbar-link-color;
+$navbar-link-color-bg-hover: #68AFC1;
+$navbar-link-active-color: red;
+$navbar-link-active-color-bg: green;
+
+$navbar-link-border-color: lighten($navbar-link-color-bg, 30%);
+// based on
+// https://webdesign.tutsplus.com/tutorials/big-menus-small-screens-responsive-multi-level-navigation--webdesign-8452
+
+.toggleMenu {
+    display:  inline-block !important;
+    color: $navbar-link-color;
+    line-height: 1;
+
+    .label{
+      color: $navbar-link-color;
+      display: inline-block;
+      margin-left: 5px;
+      vertical-align: top;
+    }
+
+    @media screen and (min-width: $navbar-breackpoint) {
+        display: none !important;
+    }
+}
+
+.nav-bar{
+
+  background: $navbar-bg;
+
+  ul, li{
+    margin: 0px;
+    list-style: none;
+  }
+
+  .menu {
+      display: none;
+
+      &:before,
+      &:after{
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      a {
+          padding: 10px 15px;
+          color: $navbar-link-color;
+          border-top: 1px solid $navbar-link-border-color;
+          display: block;
+          box-sizing: border-box;
+          *zoom: 1;
+      }
+
+      a:hover{
+        color: $navbar-link-color-hover;
+      }
+
+      > li {
+          display: block;
+          position: relative;
+          z-index: 200;
+      }
+
+      // show content when hover
+      li.hover > ul {
+        display: block;
+      }
+
+      // submenus 1rst level
+      li{
+        position: relative;
+
+        ul {
+            display: none;
+            position: static;
+            z-index: 100;
+        }
+
+        li a {
+            background-color: lighten($navbar-bg, 5%);
+            border-bottom: 1px solid $navbar-link-border-color;
+        }
+
+        // submenus 2n level
+        li li a {
+            background-color: lighten($navbar-bg, 10%);
+        }
+
+        // submenus 3r level
+        li li li a {
+            background-color: lighten($navbar-bg, 5%);
+        }
+      }
+  }
+
+
+  @media screen and (min-width: $navbar-breackpoint) {
+    .menu{
+      display: block !important;
+
+      > li {
+        display: inline-block;
+      }
+
+      li ul {
+          min-width: 9em;
+          position: absolute;
+      }
+
+      // hover function
+      // submenus 1rst level
+      > li > ul {
+          left: 0;
+      }
+
+      // submenus 2n level
+      li li > ul {
+          left: 100%;
+          top: 0;
+      }
+    }
+  }
+}

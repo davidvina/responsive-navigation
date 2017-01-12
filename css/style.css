@@ -31,6 +31,77 @@
 *
 *****************************************************************/
 @import url("https://fonts.googleapis.com/css?family=Arimo");
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 0px auto; }
+
+.toggleMenu {
+  display: inline-block !important;
+  color: #fff;
+  line-height: 1; }
+  .toggleMenu .label {
+    color: #fff;
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: top; }
+  @media screen and (min-width: 768px) {
+    .toggleMenu {
+      display: none !important; } }
+
+.nav-bar {
+  background: #FF6B5A; }
+  .nav-bar ul, .nav-bar li {
+    margin: 0px;
+    list-style: none; }
+  .nav-bar .menu {
+    display: none; }
+    .nav-bar .menu:before, .nav-bar .menu:after {
+      content: " ";
+      display: table;
+      clear: both; }
+    .nav-bar .menu a {
+      padding: 10px 15px;
+      color: #fff;
+      border-top: 1px solid #fff4f3;
+      display: block;
+      box-sizing: border-box;
+      *zoom: 1; }
+    .nav-bar .menu a:hover {
+      color: #fff; }
+    .nav-bar .menu > li {
+      display: block;
+      position: relative;
+      z-index: 200; }
+    .nav-bar .menu li.hover > ul {
+      display: block; }
+    .nav-bar .menu li {
+      position: relative; }
+      .nav-bar .menu li ul {
+        display: none;
+        position: static;
+        z-index: 100; }
+      .nav-bar .menu li li a {
+        background-color: #ff8274;
+        border-bottom: 1px solid #fff4f3; }
+      .nav-bar .menu li li li a {
+        background-color: #ff998d; }
+      .nav-bar .menu li li li li a {
+        background-color: #ff8274; }
+  @media screen and (min-width: 768px) {
+    .nav-bar .menu {
+      display: block !important; }
+      .nav-bar .menu > li {
+        display: inline-block; }
+      .nav-bar .menu li ul {
+        min-width: 9em;
+        position: absolute; }
+      .nav-bar .menu > li > ul {
+        left: 0; }
+      .nav-bar .menu li li > ul {
+        left: 100%;
+        top: 0; } }
+
 /****************************************************************
 *
 * 1. Base
@@ -405,8 +476,10 @@ output {
   -webkit-box-shadow: inset 0 0 3px #ccc;
   -moz-box-shadow: inset 0 0 3px #ccc;
   box-shadow: inset 0 0 3px #ccc;
-  -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
   border-radius: 10px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -488,8 +561,10 @@ button {
   color: #403339;
   background-color: transparent;
   border: 2px solid #68AFC1;
-  -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
   border-radius: 6px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
@@ -663,8 +738,10 @@ http://fontello.com/
   color: #403339;
   background-color: transparent;
   border: 2px solid #68AFC1;
-  -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
   border-radius: 6px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
@@ -701,8 +778,20 @@ input[type="reset"].small,
  * @site https://jonsuh.com/hamburgers
  * @link https://github.com/jonsuh/hamburgers
  */
+/*
+$hamburger-padding-x                       : 15px !default;
+$hamburger-padding-y                       : 15px !default;
+$hamburger-layer-width                     : 40px !default;
+$hamburger-layer-height                    : 4px !default;
+$hamburger-layer-spacing                   : 6px !default;
+$hamburger-layer-color                     : #000 !default;
+$hamburger-layer-border-radius             : 4px !default;
+$hamburger-hover-opacity                   : 0.7 !default;
+$hamburger-hover-transition-duration       : 0.15s !default;
+$hamburger-hover-transition-timing-function: linear !default;
+*/
 .hamburger {
-  padding: 15px 15px;
+  padding: 10px 10px;
   display: inline-block;
   cursor: pointer;
   transition-property: opacity, filter;
@@ -716,10 +805,10 @@ input[type="reset"].small,
   margin: 0;
   overflow: visible; }
   .hamburger:hover {
-    opacity: 0.7; }
+    opacity: 1; }
 
 .hamburger-box {
-  width: 40px;
+  width: 30px;
   height: 24px;
   display: inline-block;
   position: relative; }
@@ -729,9 +818,9 @@ input[type="reset"].small,
   top: 50%;
   margin-top: -2px; }
   .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
-    width: 40px;
+    width: 30px;
     height: 4px;
-    background-color: #000;
+    background-color: #fff;
     border-radius: 4px;
     position: absolute;
     transition-property: transform;
@@ -793,10 +882,10 @@ button.hamburger:hover {
       display: none; }
 #navigation a {
   padding: 10px;
-  color: #F5F4F4;
+  color: #fff;
   background-color: #FF6B5A; }
   #navigation a:hover {
-    color: #5a0900;
+    color: #fff;
     background-color: #68AFC1; }
   #navigation a.active {
     color: red;
